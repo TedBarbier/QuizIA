@@ -7,69 +7,61 @@ function shuffleArray(array) {
     }
 }
 
-function Question({ questionData, questionIndex, totalQuestions, onAnswerSubmit, userAnswer, score, explanation }) {
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [shuffledOptions, setShuffledOptions] = useState([]);
-    const correctAnswerIndexRef = useRef(null);
-    useEffect(() => {
-        setSelectedAnswer(null);
-        setIsSubmitted(false);
-        const optionsCopy = [...questionData.options];
-        shuffleArray(optionsCopy);
-        setShuffledOptions(optionsCopy);
-
-        correctAnswerIndexRef.current = questionData.options.indexOf(questionData.correctAnswer);
-    }, [questionIndex, questionData.options, questionData.correctAnswer]);
+function Question({ questionData, questionIndex, totalQuestions, onAnswerSubmit, onNextQuestion, userAnswer, score, explanation }) {
+    const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
+    const [showNextButton, setShowNextButton] = React.useState(false);
 
     const handleSubmit = () => {
         setIsSubmitted(true);
+        setShowNextButton(true);
         onAnswerSubmit(selectedAnswer);
     };
 
-    const getCorrectAnswerFromShuffled = () => {
-        if (correctAnswerIndexRef.current !== null) {
-            return shuffledOptions[correctAnswerIndexRef.current];
-        }
-        return questionData.correctAnswer;
+    const handleNextQuestion = () => {
+        setIsSubmitted(false);
+        setShowNextButton(false);
+        setSelectedAnswer(null);
+        onNextQuestion();
     };
 
     return (
-        <div className="question-card">
-            <h3>Question {questionIndex + 1} / {totalQuestions}</h3>
-            <p className="scenario">{questionData.scenario}</p>
-            <p className="question-text">{questionData.question}</p>
-                <ul className="options-list">
-                {shuffledOptions.map((option, index) => (
-                        <li key={index}>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name={`question-${questionIndex}`}
+        <div className="question">
+            <h2>Question {questionIndex + 1} / {totalQuestions}</h2>
+            <p>{questionData.question}</p>
+            <ul>
+                {questionData.answers.map((answer, index) => (
+                    <li key={index}>
+                        <label>
+                            <input
+                                type="radio"
+                                name="answer"
                                 value={index}
                                 checked={selectedAnswer === index}
                                 onChange={() => setSelectedAnswer(index)}
                                 disabled={isSubmitted}
                             />
-                            {option}
+                            {answer}
                         </label>
                     </li>
                 ))}
             </ul>
-                <div className="question-buttons">
-                <button onClick={handleSubmit} disabled={isSubmitted || selectedAnswer === null}>
-                    Soumettre la réponse
+            {!isSubmitted && (
+                <button onClick={handleSubmit} disabled={selectedAnswer === null}>
+                    Soumettre
                 </button>
-                <button type="button" className="skip-button" onClick={() => onAnswerSubmit(null)} disabled={isSubmitted}>
-                    Passer la question
-                </button>
-                    </div>
+            )}
             {isSubmitted && (
-                <div className={selectedAnswer === correctAnswerIndexRef.current ? "feedback correct" : "feedback incorrect"}>
-                    <p>Votre réponse : {shuffledOptions[selectedAnswer]}</p>
-                    <p>Réponse correcte : {getCorrectAnswerFromShuffled()}</p>
+                <div>
+                    <p>Votre réponse : {questionData.answers[selectedAnswer]}</p>
+                    <p>Réponse correcte : {questionData.answers[questionData.correctAnswer]}</p>
                     <p>Explication : {explanation}</p>
-                    <p className="current-score">Score actuel : {score} / {questionIndex + 1}</p>
+                    <p>Score actuel : {score}</p>
+                    {showNextButton && (
+                        <button onClick={handleNextQuestion}>
+                            Suivant
+                        </button>
+                    )}
                 </div>
             )}
         </div>
