@@ -4,6 +4,7 @@ function Question({ questionData, questionIndex, totalQuestions, onAnswerSubmit,
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showNextButton, setShowNextButton] = useState(false);
+
     const handleSubmit = () => {
         setIsSubmitted(true);
         setShowNextButton(true);

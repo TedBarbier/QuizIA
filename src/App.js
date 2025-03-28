@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import Question from './components/Question';
 import Footer from './components/Footer';
-const questions = [
-    {
-        question: "Quelle est la capitale de la France?",
-        answers: ["Paris", "Londres", "Berlin", "Madrid"],
-        correctAnswer: 0,
-        explanation: "Paris est la capitale de la France."
-    },
-    // Ajoutez d'autres questions ici
-];
-
+import questions from './questionsData';
 function App() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
+
     const handleAnswerSubmit = (selectedAnswer) => {
         const currentQuestion = questions[currentQuestionIndex];
         if (selectedAnswer === currentQuestion.correctAnswer) {
