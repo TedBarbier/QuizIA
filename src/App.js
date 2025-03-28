@@ -3,16 +3,6 @@ import Question from './components/Question';
 import Footer from './components/Footer';
 import originalQuestionsData from './questionsData';
 
-const questions = [
-    {
-        question: "Quelle est la capitale de la France?",
-        answers: ["Paris", "Londres", "Berlin", "Madrid"],
-        correctAnswer: 0,
-        explanation: "Paris est la capitale de la France."
-    },
-    // Ajoutez d'autres questions ici
-];
-
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
