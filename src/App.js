@@ -93,10 +93,11 @@ function App() {
                 </div>
             ) : (
                 <>
+                          
                     <p className="scenario-intro">
-                        Bienvenue au partiel d'entraînement en Droit du Numérique d'Innovatech Solutions ! <br/>
-                        Innovatech Solutions, une entreprise technologique dynamique, est confrontée à divers scénarios juridiques dans le monde numérique. <br/>
-                        Répondez aux questions pour tester vos connaissances en "Droit du Numérique" et aider Innovatech à relever ces défis !
+                        Bienvenue au Quiz d'Entraînement en Intelligence Artificielle ! <br/>
+                        Testez vos connaissances sur les concepts fondamentaux de l'IA, des agents intelligents aux algorithmes de recherche et d'apprentissage. <br/>
+                        Ce quiz vous aidera à évaluer votre compréhension des principes de l'Intelligence Artificielle.
                     </p>
                     <Question
                         questionData={currentQuestion}
