@@ -1,10 +1,8 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import Question from './components/Question';
-import Footer from './components/Footer'; // Import Footer component
-import originalQuestionsData from './questionsData'; // Import original questions data
+import Footer from './components/Footer';
+import originalQuestionsData from './questionsData';
 
-// Helper function to shuffle array in place (Fisher-Yates Shuffle)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -13,21 +11,19 @@ function shuffleArray(array) {
 }
 
 function App() {
-    const [shuffledQuestionsData, setShuffledQuestionsData] = useState([]); // State for shuffled questions
+    const [shuffledQuestionsData, setShuffledQuestionsData] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
-    const [userAnswers, setUserAnswers] = useState(Array(originalQuestionsData.length).fill(null)); // Track user answers - use original length
+    const [userAnswers, setUserAnswers] = useState(Array(originalQuestionsData.length).fill(null));
 
     useEffect(() => {
-        // Shuffle questions on component mount
-        const questionsCopy = [...originalQuestionsData]; // Create a copy to avoid modifying original
+        const questionsCopy = [...originalQuestionsData];
         shuffleArray(questionsCopy);
         setShuffledQuestionsData(questionsCopy);
-    }, []); // Run only once on mount
+    }, []);
 
-
-    const currentQuestion = shuffledQuestionsData[currentQuestionIndex]; // Use shuffled questions
+    const currentQuestion = shuffledQuestionsData[currentQuestionIndex];
 
     const handleAnswerSubmit = (selectedAnswer) => {
         const updatedUserAnswers = [...userAnswers];
@@ -38,7 +34,7 @@ function App() {
             setScore(score + 1);
         }
 
-        if (currentQuestionIndex < shuffledQuestionsData.length - 1) { // Use shuffled length
+        if (currentQuestionIndex < shuffledQuestionsData.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
             setShowResults(true);
@@ -46,7 +42,6 @@ function App() {
     };
 
     const handleRestartQuiz = () => {
-        // Shuffle questions again on restart
         const questionsCopy = [...originalQuestionsData];
         shuffleArray(questionsCopy);
         setShuffledQuestionsData(questionsCopy);
@@ -54,15 +49,12 @@ function App() {
         setCurrentQuestionIndex(0);
         setScore(0);
         setShowResults(false);
-        setUserAnswers(Array(originalQuestionsData.length).fill(null)); // Reset user answers - use original length
+        setUserAnswers(Array(originalQuestionsData.length).fill(null));
     };
 
-
-    // Render only if shuffledQuestionsData is populated
     if (!shuffledQuestionsData || shuffledQuestionsData.length === 0) {
-        return <div>Loading quiz...</div>; // Or a loading spinner
+        return <div>Loading quiz...</div>;
     }
-
 
     return (
         <div className="app">
@@ -71,9 +63,9 @@ function App() {
             {showResults ? (
                 <div className="results">
                     <h2>Résultats du Quiz</h2>
-                    <p>Votre Score : {score} sur {shuffledQuestionsData.length}</p> {/* Use shuffled length */}
+                    <p>Votre Score : {score} sur {shuffledQuestionsData.length}</p>
                     <div className="results-review">
-                        {shuffledQuestionsData.map((question, index) => ( // Use shuffled questions for results
+                        {shuffledQuestionsData.map((question, index) => (
                             <div key={index} className="result-question-card">
                                 <h3>Question {index + 1}</h3>
                                 <p className="scenario">{question.scenario}</p>
@@ -93,7 +85,6 @@ function App() {
                 </div>
             ) : (
                 <>
-                          
                     <p className="scenario-intro">
                         Bienvenue au Quiz d'Entraînement en Intelligence Artificielle ! <br/>
                         Testez vos connaissances sur les concepts fondamentaux de l'IA, des agents intelligents aux algorithmes de recherche et d'apprentissage. <br/>
@@ -102,14 +93,14 @@ function App() {
                     <Question
                         questionData={currentQuestion}
                         questionIndex={currentQuestionIndex}
-                        totalQuestions={shuffledQuestionsData.length} // Use shuffled length
+                        totalQuestions={shuffledQuestionsData.length}
                         onAnswerSubmit={handleAnswerSubmit}
                         userAnswer={userAnswers[currentQuestionIndex]}
-                        score={score} // Pass the score here
+                        score={score}
                     />
                 </>
             )}
-            <Footer /> {/* Include the Footer component here */}
+            <Footer />
         </div>
     );
 }
