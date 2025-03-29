@@ -6,9 +6,6 @@ Bienvenue sur le projet **Quiz IA** ! Ce projet a pour but de vous aider à vous
 
 - [À propos](#à-propos)
 - [Fonctionnalités](#fonctionnalités)
-- [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Contribuer](#contribuer)
 - [Licence](#licence)
 - [Contact](#contact)
 
