@@ -1,304 +1,313 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #f0f2f5; /* Light gray background */
-    color: #333; /* Dark gray text color */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align items to the start of the flex container */
-    min-height: 100vh;
-    padding-top: 20px; /* Add some padding at the top */
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
-  .app {
-    background-color: white;
-    padding: 30px;
-    border-radius: 12px; /* More rounded corners */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow */
-    width: 80%;
-    max-width: 900px; /* Wider max width */
-    margin-bottom: 40px; /* Add margin at the bottom */
-  }
-  
-  h1 {
-    color: #007bff; /* Primary blue color */
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: bold; /* Make the title bold */
-  }
-  
-  .scenario-intro {
-    color: #555;
-    margin-bottom: 25px;
-    line-height: 1.6; /* Improve line spacing */
-  }
-  
-  .question-card {
-    border: 1px solid #e0e0e0; /* Light gray border */
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 8px; /* Rounded corners for question cards */
-    background-color: #f9f9f9; /* Very light gray background for cards */
-  }
-  
-  .question-card h3 {
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  .question-text {
-    font-weight: 600; /* Slightly bolder question text */
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-  
-  .options-list {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  
-  .options-list li {
-    margin-bottom: 12px;
-  }
-  
-  .options-list label {
-    display: flex; /* Use flexbox for labels */
-    align-items: center; /* Center items vertically in label */
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px; /* Rounded corners for options */
-    background-color: white; /* White background for options */
-    cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s; /* Smooth transitions */
-  }
-  
-  .options-list label:hover {
-    background-color: #f0f0f0; /* Light hover background */
-    border-color: #ccc;
-  }
-  
-  .options-list input[type="radio"] {
-    margin-right: 10px;
-    appearance: none; /* Remove default radio button styling */
-    -webkit-appearance: none; /* For Safari */
-    -moz-appearance: none; /* For Firefox */
-    width: 18px;
-    height: 18px;
-    border: 1px solid #777;
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .options-list input[type="radio"]:checked {
-    border-color: #007bff; /* Blue border when checked */
-    background-color: white;
-  }
-  
-  .options-list input[type="radio"]:checked::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    background-color: #007bff; /* Blue inner circle when checked */
-    border-radius: 50%;
-  }
-  
-  
-  .question-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px; /* Increased margin */
-  }
-  
-  .question-buttons button {
-    padding: 12px 20px; /* Larger buttons */
-    border: none;
-    border-radius: 6px; /* Rounded corners for buttons */
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500; /* Slightly bolder button text */
-    transition: background-color 0.2s;
-  }
-  
-  button[type="submit"] {
-    background-color: #28a745; /* Success green */
-    color: white;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #218838; /* Darker green hover */
-  }
-  
-  button[type="submit"]:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .skip-button {
-    background-color: #ffc107; /* Warning yellow */
-    color: #333;
-  }
-  
-  .skip-button:hover {
-    background-color: #e0a800; /* Darker yellow hover */
-  }
-  
-  
-  .feedback {
-    margin-top: 20px; /* Increased margin */
-    padding: 15px;
-    border-radius: 6px; /* Rounded corners for feedback */
-    line-height: 1.5;
-  }
-  
-  .feedback.correct {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
-  
-  .feedback.incorrect {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-  }
-  
-  
-  .results {
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-top: 30px;
-    background-color: #f9f9f9;
-  }
-  
-  .results h2 {
-    margin-top: 0;
-    text-align: center;
-    color: #007bff; /* Primary blue color for results heading */
-    margin-bottom: 20px;
-  }
-  
-  .results p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-  }
-  
-  .results button {
-    background-color: #007bff; /* Primary blue for restart button */
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
-    transition: background-color 0.2s;
-    display: block; /* Make button a block element */
-    margin: 20px auto 0; /* Center button horizontally */
-  }
-  
-  .results button:hover {
-    background-color: #0056b3; /* Darker blue hover */
-  }
-  
-  
-  .results-review {
-    margin-top: 25px;
-  }
-  
-  .result-question-card {
-    border-bottom: 1px dashed #ddd; /* Dashed line between results */
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .result-question-card:last-child {
-    border-bottom: none; /* Remove border from last question in results */
-  }
-  
-  .result-question-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #555; /* Slightly lighter heading in results */
-  }
-  
-  .result-question-card .scenario {
-    color: #777; /* Lighter scenario text in results */
-    margin-bottom: 10px;
-    font-style: italic;
-  }
-  
-  .result-question-card .question-text {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .result-question-card p {
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-  
-  
-  .result-feedback {
-    font-weight: bold;
-    text-align: left; /* Align feedback text to left in results */
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-bottom: 15px; /* Add margin below feedback */
-  }
-  
-  .result-feedback.correct {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
-  
-  .result-feedback.incorrect {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-  }
-  
-  
-  .app-footer {
-      text-align: center;
-      padding: 20px 0;
-      margin-top: 40px; /* Increased margin for footer */
-      border-top: 1px solid #ddd;
-      color: #777;
-      font-size: 0.9em;
-  }
-  
-  .app-footer a {
-      color: #007bff;
-      text-decoration: none;
-  }
-  
-  .app-footer a:hover {
-      text-decoration: underline;
-  }
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5; /* Light gray background */
+  color: #333; /* Dark gray text color */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the start of the flex container */
+  min-height: 100vh;
+  padding-top: 20px; /* Add some padding at the top */
+}
 
-  .current-score {
-    font-weight: bold;
-    margin-top: 15px; /* Add some space above the score */
-    text-align: right; /* Align score to the right */
-    color: #007bff; /* Make the score blue to stand out */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+  width: 80%;
+  max-width: 900px; /* Wider max width */
+  margin-bottom: 40px; /* Add margin at the bottom */
+}
+
+h1 {
+  color: #007bff; /* Primary blue color */
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: bold; /* Make the title bold */
+}
+
+.scenario-intro {
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.6; /* Improve line spacing */
+}
+
+.question-card {
+  border: 1px solid #e0e0e0; /* Light gray border */
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 8px; /* Rounded corners for question cards */
+  background-color: #f9f9f9; /* Very light gray background for cards */
+}
+
+.question-card h3 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.question-text {
+  font-weight: 600; /* Slightly bolder question text */
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.options-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.options-list li {
+  margin-bottom: 12px;
+}
+
+.options-list label {
+  display: flex; /* Use flexbox for labels */
+  align-items: center; /* Center items vertically in label */
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px; /* Rounded corners for options */
+  background-color: white; /* White background for options */
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s; /* Smooth transitions */
+}
+
+.options-list label:hover {
+  background-color: #f0f0f0; /* Light hover background */
+  border-color: #ccc;
+}
+
+.options-list input[type="radio"] {
+  margin-right: 10px;
+  appearance: none; /* Remove default radio button styling */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  width: 18px;
+  height: 18px;
+  border: 1px solid #777;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.options-list input[type="radio"]:checked {
+  border-color: #007bff; /* Blue border when checked */
+  background-color: white;
+}
+
+.options-list input[type="radio"]:checked::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #007bff; /* Blue inner circle when checked */
+  border-radius: 50%;
+}
+
+
+.question-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Increased margin */
+}
+
+.question-buttons button {
+  padding: 12px 20px; /* Larger buttons */
+  border: none;
+  border-radius: 6px; /* Rounded corners for buttons */
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500; /* Slightly bolder button text */
+  transition: background-color 0.2s;
+}
+
+button[type="submit"] {
+  background-color: #28a745; /* Success green */
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838; /* Darker green hover */
+}
+
+button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.skip-button {
+  background-color: #ffc107; /* Warning yellow */
+  color: #333;
+}
+
+.skip-button:hover {
+  background-color: #e0a800; /* Darker yellow hover */
+}
+
+
+.feedback {
+  margin-top: 20px; /* Increased margin */
+  padding: 15px;
+  border-radius: 6px; /* Rounded corners for feedback */
+  line-height: 1.5;
+}
+
+.feedback.correct {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.feedback.incorrect {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+
+.results {
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 30px;
+  background-color: #f9f9f9;
+}
+
+.results h2 {
+  margin-top: 0;
+  text-align: center;
+  color: #007bff; /* Primary blue color for results heading */
+  margin-bottom: 20px;
+}
+
+.results p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.results button {
+  background-color: #007bff; /* Primary blue for restart button */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  display: block; /* Make button a block element */
+  margin: 20px auto 0; /* Center button horizontally */
+}
+
+.results button:hover {
+  background-color: #0056b3; /* Darker blue hover */
+}
+
+
+.results-review {
+  margin-top: 25px;
+}
+
+.result-question-card {
+  border-bottom: 1px dashed #ddd; /* Dashed line between results */
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.result-question-card:last-child {
+  border-bottom: none; /* Remove border from last question in results */
+}
+
+.result-question-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #555; /* Slightly lighter heading in results */
+}
+
+.result-question-card .scenario {
+  color: #777; /* Lighter scenario text in results */
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.result-question-card .question-text {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.result-question-card p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+
+.result-feedback {
+  font-weight: bold;
+  text-align: left; /* Align feedback text to left in results */
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 15px; /* Add margin below feedback */
+}
+
+.result-feedback.correct {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.result-feedback.incorrect {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+
+.app-footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px; /* Increased margin for footer */
+    border-top: 1px solid #ddd;
+    color: #777;
+    font-size: 0.9em;
+}
+
+.app-footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.app-footer a:hover {
+    text-decoration: underline;
+}
+
+.current-score {
+  font-weight: bold;
+  margin-top: 15px; /* Add some space above the score */
+  text-align: right; /* Align score to the right */
+  color: #007bff; /* Make the score blue to stand out */
+}
+
+.next-button {
+background-color: #28a745; /* Green */
+color: #333;
+}
+
+.next-button:hover {
+background-color: #04e910; /* Darker yellow hover */
 }
