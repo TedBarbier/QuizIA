@@ -7,27 +7,27 @@ function shuffleArray(array) {
     }
 }
 
-function Question({ questionData, questionIndex, totalQuestions, onAnswerSubmit, onNextQuestion, score }) {
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
+function getCorrectAnswerFromShuffled(shuffledOptions, correctAnswer) {
+    return shuffledOptions.find(option => option === correctAnswer);
+}
+function Question({ questionData, questionIndex, totalQuestions, onAnswerSubmit, onNextQuestion, userAnswer, setUserAnswer, score }) {
+    const [showResult, setShowResult] = useState(false);
+    const [shuffledOptions, setShuffledOptions] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [shuffledAnswers, setShuffledAnswers] = useState([]);
+
     useEffect(() => {
-        setSelectedAnswer(null);
+        const options = [...questionData.options];
+        shuffleArray(options);
+        setShuffledOptions(options);
         setIsSubmitted(false);
-        const shuffled = [...questionData.options];
-        shuffleArray(shuffled);
-        setShuffledAnswers(shuffled);
-    }, [questionIndex, questionData.options]);
+    }, [questionData]);
 
-    const handleSubmit = () => {
+    const handleAnswerSubmit = () => {
+        const correctAnswer = getCorrectAnswerFromShuffled(shuffledOptions, questionData.correctAnswer);
+        const isCorrect = userAnswer === correctAnswer;
+        onAnswerSubmit(isCorrect);
+        setShowResult(true);
         setIsSubmitted(true);
-        onAnswerSubmit(selectedAnswer);
-    };
-
-    const handleNextQuestion = () => {
-        setIsSubmitted(false);
-        setSelectedAnswer(null);
-        onNextQuestion();
     };
 
     return (
@@ -35,46 +35,51 @@ function Question({ questionData, questionIndex, totalQuestions, onAnswerSubmit,
             <h3>Question {questionIndex + 1} / {totalQuestions}</h3>
             <p className="scenario">{questionData.scenario}</p>
             <p className="question-text">{questionData.question}</p>
+            <form onSubmit={(e) => { e.preventDefault(); handleAnswerSubmit(); }}>
                 <ul className="options-list">
-                {shuffledAnswers.map((answer, index) => (
+                    {shuffledOptions.map((option, index) => (
                         <li key={index}>
                             <label>
                                 <input
                                     type="radio"
                                     name={`question-${questionIndex}`}
-                                value={answer}
-                                checked={selectedAnswer === answer}
-                                onChange={() => setSelectedAnswer(answer)}
-                                disabled={isSubmitted}
-                            />
-                            {answer}
-                        </label>
-                    </li>
-                ))}
-            </ul>
-            {!isSubmitted && (
+                                    value={option}
+                                    checked={userAnswer === option}
+                                    onChange={() => setUserAnswer(option)}
+                                    disabled={isSubmitted}
+                                />
+                                {option}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
                 <div className="question-buttons">
-                    <button onClick={handleSubmit} disabled={selectedAnswer === null}>
-                        Soumettre la réponse
-                    </button>
-                    <button type="button" className="skip-button" onClick={handleNextQuestion}>
-                        Passer la question
-                    </button>
+                    <button type="submit" disabled={isSubmitted}>Soumettre la réponse</button>
+                    <button type="button" className="skip-button" onClick={() => {
+                        setUserAnswer(null);
+                            setShowResult(false);
+                        onAnswerSubmit(null);
+                        setIsSubmitted(false);
+                    }}>Passer la question</button>
+                    </div>
+
+                {showResult && (
+                    <div className={userAnswer === getCorrectAnswerFromShuffled(shuffledOptions, questionData.correctAnswer) ? "feedback correct" : "feedback incorrect"}>
+                        {userAnswer === getCorrectAnswerFromShuffled(shuffledOptions, questionData.correctAnswer) ? (
+                            <p>Correct ! 🎉 {questionData.explanation}</p>
+                        ) : (
+                            <p>Incorrect. 😔 La bonne réponse est : <strong>{getCorrectAnswerFromShuffled(shuffledOptions, questionData.correctAnswer)}</strong>. {questionData.explanation}</p>
+                        )}
+                        <p className="current-score">Score actuel : {score} / {questionIndex + 1}</p>
+                        <p className="question-buttons">
+                        <button type="submit" className = "next-button" onClick={() => {
+                            setShowResult(false);
+                            onNextQuestion();
+                        }}>Prochaine Question</button>
+                        </p>
                     </div>
                 )}
-            {isSubmitted && (
-                <div className={selectedAnswer === questionData.correctAnswer ? "feedback correct" : "feedback incorrect"}>
-                    {selectedAnswer === questionData.correctAnswer ? (
-                        <p>Correct ! 🎉 {questionData.explanation}</p>
-                    ) : (
-                        <p>Incorrect. 😔 La bonne réponse est : <strong>{questionData.correctAnswer}</strong>. {questionData.explanation}</p>
-                    )}
-                    <p className="current-score">Score actuel : {score} / {questionIndex + 1}</p>
-                    <button onClick={handleNextQuestion}>
-                        Suivant
-                    </button>
-        </div>
-            )}
+            </form>
         </div>
     );
 }
