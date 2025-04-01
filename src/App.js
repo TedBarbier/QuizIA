@@ -39,7 +39,7 @@ function App() {
 
     return (
         <div className="app">
-            <h1>Droit du Numérique - Partiel d'Entraînement</h1>
+            <h1>Intelligece Artificielle - Partiel d'Entraînement</h1>
 
             {currentQuestionIndex < shuffledQuestionsData.length ? (
             <>
