@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Question from './components/Question';
 import Footer from './components/Footer';
 import originalQuestionsData from './questionsData';
-import { InlineMath, BlockMath } from 'react-katex';
-import 'katex/dist/katex.min.css'; // Importez les styles CSS de KaTeX
+
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
