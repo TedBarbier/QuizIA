@@ -908,7 +908,33 @@ const questionsData = [
         ],
         correctAnswer: "L'agent réflexe basé sur un modèle utilise un modèle interne de l'environnement pour prendre ses décisions.",
         explanation: "L'agent réflexe basé sur un modèle se distingue par l'utilisation d'un modèle interne de l'environnement. Ce modèle lui permet de raisonner sur les conséquences de ses actions et de prendre des décisions plus complexes que le simple agent réflexe, qui se base uniquement sur les perceptions courantes."
-    }
+    },
+    {
+        category: "Apprentissage par Renforcement (Q-learning)",
+        scenario: "Un robot doit apprendre à naviguer dans un labyrinthe pour atteindre un objectif. Nous utilisons le Q-learning pour entraîner ce robot.",
+        question: "Quelle est la formule de mise à jour de la Q-table (Q(s, a)) lors d'une itération Q-learning, en utilisant les notations suivantes :  \n-  \( Q(s, a) \) : Valeur Q actuelle pour l'état \( s \) et l'action \( a \) \n-  \( r \) : Récompense immédiate reçue après avoir effectué l'action \( a \) dans l'état \( s \) et atteint l'état \( s' \) \n-  \( \gamma \) : Facteur d'escompte (gamma) \n-  \( \alpha \) : Taux d'apprentissage (alpha) \n-  \( \max_{a'} Q(s', a') \) : Valeur Q maximale possible dans le nouvel état \( s' \)?",
+        options: [
+          "\( Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)] \)",
+          "\( Q(s, a) \leftarrow Q(s, a) + \alpha [r - \gamma \max_{a'} Q(s', a') - Q(s, a)] \)",
+          "\( Q(s, a) \leftarrow r + \gamma \max_{a'} Q(s', a') \)",
+          "\( Q(s, a) \leftarrow Q(s, a) + [r + \gamma \max_{a'} Q(s', a') - Q(s, a)] \)"
+        ],
+        correctAnswer: "\( Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)] \)",
+        explanation: "La formule correcte est la mise à jour de la Q-table qui prend en compte la différence entre la 'cible' (récompense immédiate plus la valeur future maximale escomptée) et la valeur Q actuelle, multipliée par le taux d'apprentissage \( \alpha \).  Cette formule itérative permet de converger vers les valeurs Q optimales."
+      },
+      {
+        category: "Optimisation (Descente de Gradient)",
+        scenario: "Vous entraînez un modèle de régression linéaire pour prédire le prix des maisons en fonction de leur superficie. Vous utilisez la descente de gradient pour optimiser les paramètres de votre modèle.",
+        question: "Considérons une fonction de coût \( J(\theta) \) que nous souhaitons minimiser par descente de gradient, où \( \theta \) représente les paramètres du modèle. Quelle est l'expression mathématique correcte pour mettre à jour les paramètres \( \theta \) à chaque itération de la descente de gradient, en utilisant un taux d'apprentissage \( \eta \) (eta) et le gradient de \( J(\theta) \) noté \( \nabla J(\theta) \)?",
+        options: [
+          "\( \theta \leftarrow \theta - \eta \nabla J(\theta) \)",
+          "\( \theta \leftarrow \theta + \eta \nabla J(\theta) \)",
+          "\( \theta \leftarrow \theta - \frac{1}{\eta} \nabla J(\theta) \)",
+          "\( \theta \leftarrow \theta + \frac{1}{\eta} \nabla J(\theta) \)"
+        ],
+        correctAnswer: "\( \theta \leftarrow \theta - \eta \nabla J(\theta) \)",
+        explanation: "La descente de gradient vise à minimiser la fonction de coût en se déplaçant dans la direction opposée du gradient.  Le gradient \( \nabla J(\theta) \) indique la direction de la plus forte augmentation de \( J(\theta) \). En soustrayant une fraction du gradient (multipliée par le taux d'apprentissage \( \eta \)) aux paramètres \( \theta \), nous nous déplaçons vers un minimum local de la fonction de coût."
+      }
 ];
 
 export default questionsData;
