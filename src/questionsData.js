@@ -934,6 +934,45 @@ const questionsData = [
         ],
         correctAnswer: "\( \theta \leftarrow \theta - \eta \nabla J(\theta) \)",
         explanation: "La descente de gradient vise à minimiser la fonction de coût en se déplaçant dans la direction opposée du gradient.  Le gradient \( \nabla J(\theta) \) indique la direction de la plus forte augmentation de \( J(\theta) \). En soustrayant une fraction du gradient (multipliée par le taux d'apprentissage \( \eta \)) aux paramètres \( \theta \), nous nous déplaçons vers un minimum local de la fonction de coût."
+      },
+      {
+        category: "Réseaux de Neurones (Perceptron)",
+        scenario: "Vous utilisez un perceptron simple pour déterminer si un email est un spam ou non, en se basant sur le nombre de mots clés suspects qu'il contient.",
+        question: "Quelle est la fonction principale d'un perceptron dans un contexte de classification binaire (deux classes) comme spam/non-spam ?",
+        options: [
+          "Calculer la moyenne des mots clés présents dans l'email.",
+          "Séparer linéairement les données en deux catégories en utilisant une frontière de décision.",
+          "Identifier tous les mots clés suspects dans l'email.",
+          "Générer de nouveaux emails de spam pour améliorer sa détection."
+        ],
+        correctAnswer: "Séparer linéairement les données en deux catégories en utilisant une frontière de décision.",
+        explanation: "Un perceptron est conçu pour trouver une frontière linéaire qui sépare les données en deux classes. Dans le cas du spam, il cherche à séparer les emails en deux groupes : spam et non-spam, en se basant sur une combinaison linéaire des caractéristiques (ici, les mots clés)."
+      },
+      {
+        category: "Réseaux de Neurones (Perceptron Multicouche)",
+        scenario: "Vous souhaitez construire un système de reconnaissance d'images capable de distinguer différents types d'animaux (chats, chiens, oiseaux). Vous envisagez d'utiliser un perceptron multicouche.",
+        question: "Pourquoi un perceptron multicouche (MLP) est-il souvent préféré à un perceptron simple pour des tâches complexes comme la reconnaissance d'images ?",
+        options: [
+          "Parce qu'il est plus simple à entraîner qu'un perceptron simple.",
+          "Parce qu'il peut apprendre des relations non linéaires entre les caractéristiques grâce à ses couches cachées.",
+          "Parce qu'il utilise une fonction d'activation linéaire, contrairement au perceptron simple.",
+          "Parce qu'il n'a besoin que d'une seule couche pour fonctionner efficacement."
+        ],
+        correctAnswer: "Parce qu'il peut apprendre des relations non linéaires entre les caractéristiques grâce à ses couches cachées.",
+        explanation: "La puissance du perceptron multicouche réside dans ses couches cachées et ses fonctions d'activation non linéaires.  Ces éléments lui permettent de modéliser des relations complexes et non linéaires dans les données, ce qui est essentiel pour des tâches comme la reconnaissance d'images où les relations entre les pixels et les catégories d'images sont rarement linéaires."
+      },
+      {
+        category: "Apprentissage (Rétropropagation)",
+        scenario: "Vous entraînez un perceptron multicouche pour la classification d'images.  Après chaque prédiction sur une image, vous devez ajuster les poids du réseau pour améliorer ses performances.",
+        question: "Quel est le rôle principal de l'algorithme de rétropropagation (backpropagation) lors de l'entraînement d'un perceptron multicouche ?",
+        options: [
+          "Calculer la précision du réseau sur les données d'entraînement.",
+          "Propager l'erreur de prédiction de la sortie vers les couches précédentes pour ajuster les poids du réseau.",
+          "Déterminer la structure optimale du réseau (nombre de couches et de neurones).",
+          "Initialiser aléatoirement les poids du réseau avant l'entraînement."
+        ],
+        correctAnswer: "Propager l'erreur de prédiction de la sortie vers les couches précédentes pour ajuster les poids du réseau.",
+        explanation: "La rétropropagation est l'algorithme clé pour entraîner les perceptrons multicouches. Son but est de calculer l'erreur entre la prédiction du réseau et la sortie attendue, puis de propager cette erreur 'en arrière' à travers le réseau.  Cette propagation permet de déterminer comment chaque poids a contribué à l'erreur et d'ajuster ces poids pour réduire l'erreur lors des prochaines prédictions."
       }
 ];
 
