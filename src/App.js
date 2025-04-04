@@ -40,7 +40,7 @@ function App() {
 
     return (
         <div className="app">
-            <h1>Intelligece Artificielle - Partiel d'Entraînement</h1>
+            <h1>Intelligence Artificielle - Partiel d'Entraînement</h1>
 
             {currentQuestionIndex < shuffledQuestionsData.length ? (
             <>
